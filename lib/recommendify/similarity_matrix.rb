@@ -4,7 +4,7 @@ class Recommendify::SimilarityMatrix
 
   def initialize(opts={})
     @opts = opts
-    @write_queue = Hash.new{ |h,k| h[k] = {} }
+    @write_queue = Hash.new{ |h,k| h[k] = {} }  #provides a default value for any key value as argument
   end
 
   def redis_key(append=nil)
@@ -15,7 +15,7 @@ class Recommendify::SimilarityMatrix
     @opts[:max_neighbors] || Recommendify::DEFAULT_MAX_NEIGHBORS
   end
 
-  def update(item_id, neighbors)
+  def update(item_id, neighbors)        #updating an item with new neighbours score
     neighbors.each do |neighbor_id, score|
       if @write_queue[item_id].has_key?(neighbor_id)
         @write_queue[item_id][neighbor_id] += score

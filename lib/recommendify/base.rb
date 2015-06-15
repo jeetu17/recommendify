@@ -1,12 +1,12 @@
-class Recommendify::Base
+class Recommendify::Base    #in the scope of recommendify 
 
-  attr_reader :similarity_matrix, :input_matrices
+  attr_reader :similarity_matrix, :input_matrices   #attr_reader just gives read permission 
 
   @@max_neighbors = nil
   @@input_matrices = {}
 
-  def self.max_neighbors(n=nil)    
-    return @@max_neighbors unless n
+  def self.max_neighbors(n=nil)         #this is method that goes to the singleton class of this class (seen as an object) it is not an instance method and behave as class methods   
+    return @@max_neighbors unless n     #unless n is not nil like c++
     @@max_neighbors = n
   end
 
